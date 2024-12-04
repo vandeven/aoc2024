@@ -19,16 +19,15 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int = parseInput(input)
-        .map { a ->
+        .filter { a ->
             // Map to a list of lists containing a list with 1 number missing for each position
             List(a.size) { i -> a.filterIndexed { i2, _ -> i != i2 } }
-        }.filter { b: List<List<Int>> ->
-            b.any { c: List<Int> ->
-                c.windowed(2).all { d ->
-                    val difference = max(d[0], d[1]) - min(d[0], d[1])
-                    difference in 1..3
-                } && (c.sorted() == c || c.sortedDescending() == c)
-            }
+                .any { c: List<Int> ->
+                    c.windowed(2).all { d ->
+                        val difference = max(d[0], d[1]) - min(d[0], d[1])
+                        difference in 1..3
+                    } && (c.sorted() == c || c.sortedDescending() == c)
+                }
         }.size
 
     // Or read a large test input from the `src/Day01_test.txt` file:
