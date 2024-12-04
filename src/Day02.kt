@@ -6,17 +6,14 @@ fun main() {
         it.split(" ").map { it.toInt() }
     }
 
-    fun part1(input: List<String>): Int {
-        val parseInput = parseInput(input)
-        return parseInput.filter { a ->
-            a.windowed(2).all {
-                val difference = max(it[0], it[1]) - min(it[0], it[1])
-                difference in 1..3
-            }
-        }.filter {
-            it.sorted() == it || it.sortedDescending() == it
-        }.size
-    }
+    fun part1(input: List<String>): Int = parseInput(input).filter { a ->
+        a.windowed(2).all {
+            val difference = max(it[0], it[1]) - min(it[0], it[1])
+            difference in 1..3
+        }
+    }.filter {
+        it.sorted() == it || it.sortedDescending() == it
+    }.size
 
     fun part2(input: List<String>): Int = parseInput(input)
         .filter { a ->
